@@ -11,9 +11,14 @@ use console_subscriber::ConsoleLayer;
 
 /// Start running a Nostr relay server.
 fn main() {
+    let args = CLIArgs::parse();
+    
+    // check for config file to be specified
+    let config_dir_arg = args.config;
+
     // configure settings from config.toml
     // replace default settings with those read from config.toml
-    let mut settings = config::Settings::new();
+    let mut settings = config::Settings::new(config_dir_arg);
 
     // setup tracing
     if settings.diagnostics.tracing {
@@ -25,7 +30,6 @@ fn main() {
     }
     info!("Starting up from main");
 
-    let args = CLIArgs::parse();
 
     // get database directory from args
     let db_dir_arg = args.db;

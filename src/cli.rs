@@ -10,4 +10,11 @@ pub struct CLIArgs {
         required = false,
     )]
     pub db: Option<String>,
+    #[arg(
+        short,
+        long,
+        help = "Use the <directory> as the location of the config.toml",
+        required = false,
+    )]
+    pub config: Option<String>,
 }
